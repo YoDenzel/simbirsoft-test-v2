@@ -1,7 +1,13 @@
 .container {
   display: flex;
   width: 100%;
-  height: 100%;
-  justify-content: center;
-  color: var(--blue);
+  color: var(--black);
+  border: 1px solid var(--black);
+  flex-direction: row;
+  background-color: var(--nav-bar-primary);
+  align-items: center;
+}
+
+.button_link {
+  color: black;
 }
