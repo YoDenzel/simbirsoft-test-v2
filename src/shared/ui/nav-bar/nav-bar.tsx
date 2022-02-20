@@ -1,19 +1,27 @@
 import { Typography } from '@mui/material';
-import { NavLink } from '..';
+import { NavElement } from '..';
 import styles from './nav-bar.module.css';
 
 export function NavBar() {
   const links = [
-    <NavLink linkTo="" title="Турниры" />,
-    <NavLink linkTo="" title="Команды" />,
+    {
+      linkTo: '/',
+      title: 'Турниры',
+    },
+    {
+      linkTo: '/',
+      title: 'Команды',
+    },
   ];
 
   return (
     <div className={styles.container}>
-      <Typography variant="h5" align="left" sx={{ padding: '15px' }}>
+      <Typography variant="h5" sx={{ padding: '15px' }}>
         Heading
       </Typography>
-      {links.map(item => item)}
+      {links.map(item => (
+        <NavElement linkTo={item.linkTo} title={item.title} key={item.title} />
+      ))}
     </div>
   );
 }
