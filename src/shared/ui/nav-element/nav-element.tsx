@@ -15,9 +15,8 @@ export function NavElement({ linkTo, title }: TNavLink) {
     >
       <Button
         variant="text"
-        size="large"
+        size="medium"
         sx={{
-          fontSize: '0.7rem',
           marginTop: '5px',
         }}
       >

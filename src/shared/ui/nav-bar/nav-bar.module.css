@@ -2,8 +2,6 @@
   display: flex;
   width: 100%;
   color: var(--black);
-  border-bottom: 0.33px solid;
-  border-color: rgb(172, 172, 238);
   flex-direction: row;
   background-color: var(--nav-bar-primary);
   align-items: center;

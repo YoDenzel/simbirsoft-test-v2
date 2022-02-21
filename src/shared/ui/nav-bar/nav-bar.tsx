@@ -16,7 +16,7 @@ export function NavBar() {
 
   return (
     <div className={styles.container}>
-      <Typography variant="h5" sx={{ padding: '15px' }}>
+      <Typography variant="h5" sx={{ padding: '16px' }}>
         Heading
       </Typography>
       {links.map(item => (
