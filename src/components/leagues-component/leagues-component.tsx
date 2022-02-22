@@ -1,15 +1,18 @@
 import { useState } from 'react';
-import { Container, TextField } from '@mui/material';
+import { TextField } from '@mui/material';
+import { useGetLeaguesList } from '../../shared/custom-hooks';
+import styles from './leagues-component.module.css';
+import { LeagueElement } from '../../shared/ui';
 
 export function LeaguesComponent() {
   const [search, setSearch] = useState('');
+  const { data, isError } = useGetLeaguesList();
   const PLACEHOLDER = 'Поиск';
+
+  console.log(data, isError);
+
   return (
-    <Container
-      sx={{
-        backgroundColor: 'aliceblue',
-      }}
-    >
+    <div className={styles.container}>
       <TextField
         id="outlined-basic"
         placeholder={PLACEHOLDER}
@@ -21,6 +24,11 @@ export function LeaguesComponent() {
           paddingTop: '20px',
         }}
       />
-    </Container>
+      <div>
+        {data?.competitions.map(item => (
+          <LeagueElement countryName={item.area.name} leagueName={item.name} />
+        ))}
+      </div>
+    </div>
   );
 }
