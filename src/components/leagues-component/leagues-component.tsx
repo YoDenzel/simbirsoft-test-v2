@@ -18,15 +18,19 @@ export function LeaguesComponent() {
         placeholder={PLACEHOLDER}
         variant="outlined"
         value={search}
-        size="small"
+        size="medium"
         onChange={event => setSearch(event.target.value)}
         sx={{
-          paddingTop: '20px',
+          margin: '20px 16px',
         }}
       />
-      <div>
+      <div className={styles.list_block}>
         {data?.competitions.map(item => (
-          <LeagueElement countryName={item.area.name} leagueName={item.name} />
+          <LeagueElement
+            key={item.id}
+            countryName={item.area.name}
+            leagueName={item.name}
+          />
         ))}
       </div>
     </div>
