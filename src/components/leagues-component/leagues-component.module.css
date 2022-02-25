@@ -6,3 +6,9 @@
   display: flex;
   flex-wrap: wrap;
 }
+
+.pagination_block {
+  padding-bottom: 15px;
+  justify-content: center;
+  display: flex;
+}
