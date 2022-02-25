@@ -1,14 +1,10 @@
-.container {
-  background-color: aliceblue;
-}
-
 .list_block {
   display: flex;
   flex-wrap: wrap;
 }
 
 .pagination_block {
-  padding-bottom: 15px;
+  padding-bottom: 20px;
   justify-content: center;
   display: flex;
 }
