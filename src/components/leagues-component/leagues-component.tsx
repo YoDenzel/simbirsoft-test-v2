@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Pagination, TextField } from '@mui/material';
 import { useGetLeaguesList } from '../../shared/custom-hooks';
 import styles from './leagues-component.module.css';
@@ -12,14 +12,24 @@ export function LeaguesComponent() {
 
   const PLACEHOLDER = 'Поиск';
 
-  const pageCount = Math.ceil((data?.count || 0) / postsPerPage);
+  useEffect(() => {
+    if (search.length > 0) {
+      setCurrentPage(1);
+    }
+  }, [search]);
 
+  const filteredData = data?.competitions.filter(item => {
+    if (
+      item.name.toUpperCase().includes(search.toUpperCase().replace(/\s/g, ''))
+    ) {
+      return item;
+    }
+    return null;
+  });
+  const pageCount = Math.ceil((filteredData?.length || 0) / postsPerPage);
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = data?.competitions.slice(
-    indexOfFirstPost,
-    indexOfLastPost,
-  );
+  const currentPosts = filteredData?.slice(indexOfFirstPost, indexOfLastPost);
 
   console.log(data, isError);
 
