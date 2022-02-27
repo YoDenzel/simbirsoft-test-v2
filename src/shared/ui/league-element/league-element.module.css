@@ -6,6 +6,7 @@
   justify-content: center;
   text-align: center;
   margin: 20px 16px;
+  height: 125px;
 }
 
 @media (max-width: 500px) {
