@@ -1,1 +1,1 @@
-export { fetchLeaguesList } from './fetch-leagues-list';
+export { fetchData } from './fetch-data';

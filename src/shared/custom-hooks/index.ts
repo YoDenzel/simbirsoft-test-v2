@@ -1,1 +1,1 @@
-export { useGetLeaguesList } from './use-get-leagues-list';
+export { useGetData } from './use-get-data';

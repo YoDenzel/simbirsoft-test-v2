@@ -1,12 +1,16 @@
 import { useEffect, useState } from 'react';
 import { Pagination, TextField } from '@mui/material';
-import { useGetLeaguesList } from '../../shared/custom-hooks';
+import { useGetData } from '../../shared/custom-hooks';
 import styles from './leagues-component.module.css';
 import { LeagueElement } from '../../shared/ui';
+import { TCompetitionsList } from '../../shared/types';
 
 export function LeaguesComponent() {
-  const [search, setSearch] = useState('');
-  const { data, isError } = useGetLeaguesList();
+  const [search, setSearch] = useState(() => {
+    const value = localStorage.getItem('search');
+    return value || '';
+  });
+  const { data, isError } = useGetData('leagues', 'competitions/');
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(12);
 
@@ -16,9 +20,10 @@ export function LeaguesComponent() {
     if (search.length > 0) {
       setCurrentPage(1);
     }
+    localStorage.setItem('search', search);
   }, [search]);
 
-  const filteredData = data?.competitions.filter(item => {
+  const filteredData = data?.competitions.filter((item: TCompetitionsList) => {
     if (
       item.name.toUpperCase().includes(search.toUpperCase().replace(/\s/g, ''))
     ) {
@@ -47,7 +52,7 @@ export function LeaguesComponent() {
         }}
       />
       <div className={styles.list_block}>
-        {currentPosts?.map(item => (
+        {currentPosts?.map((item: TCompetitionsList) => (
           <LeagueElement
             key={item.id}
             countryName={item.area.name}
@@ -58,7 +63,7 @@ export function LeaguesComponent() {
       <div className={styles.pagination_block}>
         <Pagination
           count={pageCount}
-          onChange={(event, value) => setCurrentPage(value)}
+          onChange={(_, value) => setCurrentPage(value)}
           shape="rounded"
         />
       </div>
