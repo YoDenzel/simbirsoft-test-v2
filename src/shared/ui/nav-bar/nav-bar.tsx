@@ -9,7 +9,7 @@ export function NavBar() {
       title: 'Турниры',
     },
     {
-      linkTo: '/',
+      linkTo: '/teams',
       title: 'Команды',
     },
   ];
