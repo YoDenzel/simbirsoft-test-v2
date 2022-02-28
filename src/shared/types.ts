@@ -30,3 +30,31 @@ export type TArea = {
   id: number;
   name: string;
 };
+
+export type TTeamsData = {
+  count: number;
+  filters: {};
+  teams: TTeams;
+};
+
+export type TTeams = {
+  id: number;
+  area: TTeamsArea;
+  name: string;
+  shortName: string;
+  tla: string;
+  crestUrl: string;
+  address: string;
+  phone: string;
+  website: string;
+  email: string;
+  founded: number;
+  clubColors: string;
+  venue: string;
+  lastUpdated: string;
+};
+
+type TTeamsArea = {
+  id: number;
+  name: string;
+};

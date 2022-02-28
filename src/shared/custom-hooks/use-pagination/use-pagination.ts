@@ -1,17 +1,16 @@
 import { useState } from 'react';
-import { TCompetitionsList } from '../../types';
 
 type TProps = {
-  filteredData: TCompetitionsList[];
+  filteredData: any;
 };
 
 type TReturnValues = {
-    setCurrentPage: (v: number) => void,
-    pageCount: number, 
-    currentPosts: TCompetitionsList[]
-}
+  setCurrentPage: (v: number) => void;
+  pageCount: number;
+  currentPosts: any;
+};
 
-export const usePagination = ({filteredData}: TProps):TReturnValues => {
+export const usePagination = ({ filteredData }: TProps): TReturnValues => {
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(12);
   const pageCount = Math.ceil((filteredData?.length || 0) / postsPerPage);
@@ -19,5 +18,5 @@ export const usePagination = ({filteredData}: TProps):TReturnValues => {
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = filteredData?.slice(indexOfFirstPost, indexOfLastPost);
 
-  return {setCurrentPage, pageCount, currentPosts}
+  return { setCurrentPage, pageCount, currentPosts };
 };
