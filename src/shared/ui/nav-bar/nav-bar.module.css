@@ -1,7 +1,6 @@
 .container {
   display: flex;
   width: 100%;
-  color: var(--black);
   flex-direction: row;
   background-color: var(--nav-bar-primary);
   align-items: center;
