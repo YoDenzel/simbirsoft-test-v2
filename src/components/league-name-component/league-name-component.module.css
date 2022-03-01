@@ -1,0 +1,10 @@
+.container {
+  margin-left: 16px;
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+}
+
+.filterForm {
+  margin-bottom: 15px;
+}
