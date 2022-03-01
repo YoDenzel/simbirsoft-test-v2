@@ -58,3 +58,63 @@ type TTeamsArea = {
   id: number;
   name: string;
 };
+
+export type TScheduleOfTheLeague = {
+  competition: TTeamsCompetition;
+  count: number;
+  filtres: {};
+  matches: Array<TScheduleLeagueMatches>;
+};
+
+export type TScheduleLeagueMatches = {
+  id: number;
+  awayTeam: TTeamsArea;
+  homeTeam: TTeamsArea;
+  group: null;
+  lastUpdated: string;
+  matchday: number;
+  odds: {};
+  referees: TReferees;
+  score: TScore;
+  season: TSeason;
+  stage: string;
+  status: string;
+  utcDate: string;
+};
+
+type TReferees = {
+  id: number;
+  name: string;
+  role: string;
+  nationality: string;
+};
+
+type TScore = {
+  duration: string;
+  extraTime: TTimeScore;
+  fullTime: TTimeScore;
+  halfTime: TTimeScore;
+  penalties: TTimeScore;
+  winner: string;
+};
+
+type TTimeScore = {
+  homeTeam: number | null;
+  awayTeam: number | null;
+};
+
+type TSeason = {
+  id: number;
+  startDate: string;
+  endDate: string;
+  currentMatchday: string;
+};
+
+export type TTeamsCompetition = {
+  id: number;
+  area: TTeamsArea;
+  name: string;
+  code: string;
+  plan: string;
+  lastUpdated: string;
+};
