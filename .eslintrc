@@ -33,6 +33,7 @@
     "react/jsx-filename-extension": [1, { "extensions": [".tsx", ".ts", ""] }],
     "react/self-closing-comp": "off",
     "react/react-in-jsx-scope": "off",
+    "react/jsx-props-no-spreading": "off",
     "import/extensions": [
       "error",
       "ignorePackages",
