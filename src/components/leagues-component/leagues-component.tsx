@@ -47,6 +47,7 @@ export function LeaguesComponent() {
       <div className={styles.list_block}>
         {currentPosts?.map((item: TCompetitionsList) => (
           <LeagueElement
+            linkTo={`leagues/${item.id}`}
             key={item.id}
             countryName={item.area.name}
             leagueName={item.name}

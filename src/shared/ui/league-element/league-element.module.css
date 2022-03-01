@@ -9,6 +9,11 @@
   height: 125px;
 }
 
+.link {
+  text-decoration: none;
+  color: var(--header-color);
+}
+
 @media (max-width: 500px) {
   .container {
     flex: 100%;

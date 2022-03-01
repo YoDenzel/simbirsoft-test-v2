@@ -12,7 +12,7 @@ export function TeamsComponent() {
   const { data } = useGetData('teams', 'teams/');
   const [search, setSearch] = useLocalStorage({
     defaultValue: '',
-    key: 'search',
+    key: 'teams-search',
   });
   const PLACEHOLDER = 'Поиск';
   const filteredData = data?.teams.filter((item: TTeams) => {
@@ -44,6 +44,7 @@ export function TeamsComponent() {
       <div className={styles.list_block}>
         {currentPosts?.map((item: TTeams) => (
           <LeagueElement
+            linkTo="/"
             key={item.id}
             countryName={item.area.name}
             leagueName={item.name}
