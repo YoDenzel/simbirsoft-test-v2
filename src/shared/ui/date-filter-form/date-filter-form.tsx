@@ -1,5 +1,6 @@
-import { DatePicker } from '@mui/lab';
+import { DatePicker, LocalizationProvider } from '@mui/lab';
 import { TextField, Typography } from '@mui/material';
+import DateAdapter from '@mui/lab/AdapterDateFns';
 import styles from './date-filter-form.module.css';
 
 type TProps = {
@@ -16,52 +17,56 @@ export function DateFilterForm({
   setSecondValue,
 }: TProps) {
   return (
-    <div>
-      <form className={styles.filterForm}>
-        <Typography
-          variant="h6"
-          sx={{
-            paddingTop: '10px',
-            paddingRight: '10px',
-          }}
-        >
-          С
-        </Typography>
-        <DatePicker
-          value={firstValue}
-          onChange={newValue => {
-            setFirstValue(newValue);
-          }}
-          renderInput={params => (
-            <TextField
-              {...params}
-              sx={{
-                marginBottom: '10px',
-                paddingRight: '10px',
-                paddingTop: '10px',
-              }}
-            />
-          )}
-        />
-        <Typography
-          variant="h6"
-          sx={{
-            paddingTop: '10px',
-            paddingRight: '10px',
-          }}
-        >
-          По
-        </Typography>
-        <DatePicker
-          value={secondValue}
-          onChange={newValue => {
-            setSecondValue(newValue);
-          }}
-          renderInput={params => (
-            <TextField {...params} sx={{ paddingTop: '10px' }} />
-          )}
-        />
-      </form>
-    </div>
+    <LocalizationProvider dateAdapter={DateAdapter}>
+      <div>
+        <form className={styles.filterForm}>
+          <Typography
+            variant="h6"
+            sx={{
+              paddingTop: '10px',
+              paddingRight: '10px',
+            }}
+          >
+            С
+          </Typography>
+          <DatePicker
+            value={firstValue}
+            onChange={newValue => {
+              setFirstValue(newValue);
+            }}
+            inputFormat="dd/MM/yyyy"
+            renderInput={params => (
+              <TextField
+                {...params}
+                sx={{
+                  marginBottom: '10px',
+                  paddingRight: '10px',
+                  paddingTop: '10px',
+                }}
+              />
+            )}
+          />
+          <Typography
+            variant="h6"
+            sx={{
+              paddingTop: '10px',
+              paddingRight: '10px',
+            }}
+          >
+            По
+          </Typography>
+          <DatePicker
+            value={secondValue}
+            onChange={newValue => {
+              setSecondValue(newValue);
+            }}
+            inputFormat="dd/MM/yyyy"
+            renderInput={params => (
+              <TextField {...params} sx={{ paddingTop: '10px' }} />
+            )}
+          />
+        </form>
+      </div>
+    </LocalizationProvider>
   );
 }

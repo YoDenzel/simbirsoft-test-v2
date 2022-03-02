@@ -8,3 +8,8 @@
 .league_block {
   margin-left: 16px;
 }
+
+.breadcrumbs_link {
+  color: var(--header-color);
+  text-decoration: none;
+}
