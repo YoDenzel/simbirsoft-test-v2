@@ -89,7 +89,7 @@ type TReferees = {
   nationality: string;
 };
 
-type TScore = {
+export type TScore = {
   duration: string;
   extraTime: TTimeScore;
   fullTime: TTimeScore;
@@ -117,4 +117,13 @@ export type TTeamsCompetition = {
   code: string;
   plan: string;
   lastUpdated: string;
+};
+
+export type TMappedDataTeams = {
+  id: string;
+  date: string;
+  teams: string;
+  res: string | number | null;
+  status: string;
+  time: string;
 };
