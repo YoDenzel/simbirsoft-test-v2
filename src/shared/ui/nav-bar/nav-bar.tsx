@@ -6,7 +6,7 @@ export function NavBar() {
   const links = [
     {
       linkTo: '/',
-      title: 'Турниры',
+      title: 'Лиги',
     },
     {
       linkTo: '/teams',
