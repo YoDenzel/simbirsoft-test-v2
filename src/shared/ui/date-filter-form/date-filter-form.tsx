@@ -1,6 +1,6 @@
 import { DatePicker, LocalizationProvider } from '@mui/lab';
 import { TextField, Typography } from '@mui/material';
-
+import ruLocale from 'date-fns/locale/ru';
 import DateAdapter from '@mui/lab/AdapterDateFns';
 import styles from './date-filter-form.module.css';
 
@@ -18,7 +18,7 @@ export function DateFilterForm({
   setSecondValue,
 }: TProps) {
   return (
-    <LocalizationProvider dateAdapter={DateAdapter}>
+    <LocalizationProvider dateAdapter={DateAdapter} locale={ruLocale}>
       <div>
         <form className={styles.filterForm}>
           <Typography
@@ -59,10 +59,10 @@ export function DateFilterForm({
           </Typography>
           <DatePicker
             value={secondValue}
+            inputFormat="dd/MM/yyyy"
             onChange={newValue => {
               setSecondValue(newValue);
             }}
-            inputFormat="dd/MM/yyyy"
             renderInput={params => (
               <TextField {...params} sx={{ paddingTop: '10px' }} />
             )}
