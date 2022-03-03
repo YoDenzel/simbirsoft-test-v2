@@ -17,7 +17,7 @@ export function LeagueNameComponent() {
   const { id } = useParams();
   const { data, isError } = useGetData(
     'league-name',
-    `competitions/${id}/matches`,
+    `competitions/${id}/matches?dateFrom=2022-01-01&dateTo=2022-01-01`,
   );
 
   const statusFilter = (status: string) => {
@@ -58,7 +58,23 @@ export function LeagueNameComponent() {
     res: matchResult(item.score),
     status: statusFilter(item.status),
     time: formatedTime(item.utcDate).slice(10),
-  }));
+  })) as TMappedDataTeams[];
+
+  // const filteredCurrentPosts = mappedData?.filter((item: TMappedDataTeams) => {
+  //   if (firstValue && secondValue && firstValue < secondValue) {
+  //     console.log(item.date);
+  //     if (
+  //       new Date(
+  //         Number(item.date.slice(6)),
+  //         Number(item.date.slice(3, 5)),
+  //         Number(item.date.slice(0, 2)),
+  //       ) > firstValue
+  //     ) {
+  //       return item;
+  //     }
+  //   }
+  //   return null;
+  // });
 
   const { currentPosts, pageCount, setCurrentPage } = usePagination({
     filteredData: mappedData,
