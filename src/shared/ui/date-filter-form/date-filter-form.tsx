@@ -1,5 +1,6 @@
 import { DatePicker, LocalizationProvider } from '@mui/lab';
 import { TextField, Typography } from '@mui/material';
+
 import DateAdapter from '@mui/lab/AdapterDateFns';
 import styles from './date-filter-form.module.css';
 
@@ -30,6 +31,7 @@ export function DateFilterForm({
             С
           </Typography>
           <DatePicker
+            toolbarPlaceholder="дд/мм/гггг"
             value={firstValue}
             onChange={newValue => {
               setFirstValue(newValue);

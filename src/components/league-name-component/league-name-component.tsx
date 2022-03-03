@@ -59,7 +59,6 @@ export function LeagueNameComponent() {
     status: statusFilter(item.status),
     time: formatedTime(item.utcDate).slice(10),
   }));
-  console.log(mappedData);
 
   const { currentPosts, pageCount, setCurrentPage } = usePagination({
     filteredData: mappedData,
