@@ -13,7 +13,10 @@ export function LeaguesComponent() {
     defaultValue: '',
     key: 'search',
   });
-  const { data, isError } = useGetData('leagues', 'competitions/');
+  const { data, isError } = useGetData({
+    QUERY_KEY: 'leagues',
+    url: 'competitions/',
+  });
 
   const PLACEHOLDER = 'Поиск';
 

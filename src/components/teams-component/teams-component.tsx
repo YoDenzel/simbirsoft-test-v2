@@ -9,7 +9,7 @@ import { LeagueElement } from '../../shared/ui';
 import styles from '../leagues-component/leagues-component.module.css';
 
 export function TeamsComponent() {
-  const { data } = useGetData('teams', 'teams/');
+  const { data } = useGetData({ QUERY_KEY: 'teams', url: 'teams/' });
   const [search, setSearch] = useLocalStorage({
     defaultValue: '',
     key: 'teams-search',
