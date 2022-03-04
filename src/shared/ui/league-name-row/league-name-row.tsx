@@ -19,7 +19,7 @@ export function LeagueNameRow({ date, res, status, teams, time }: TProps) {
           variant="body1"
           sx={{
             padding: '5px',
-            flex: '15',
+            flex: '20',
             display: 'flex',
             justifyContent: 'center',
           }}
