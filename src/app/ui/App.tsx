@@ -4,6 +4,7 @@ import { ruRU } from '@mui/material/locale';
 import {
   LeagueNameComponent,
   LeaguesComponent,
+  TeamNameComponent,
   TeamsComponent,
 } from '../../components';
 import { NavBar } from '../../shared/ui';
@@ -18,6 +19,7 @@ function App() {
         <Route path="/" element={<LeaguesComponent />} />
         <Route path="leagues/:id" element={<LeagueNameComponent />} />
         <Route path="teams" element={<TeamsComponent />} />
+        <Route path="teams/:id" element={<TeamNameComponent />} />
       </Routes>
     </ThemeProvider>
   );
