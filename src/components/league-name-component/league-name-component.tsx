@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { format, parseISO } from 'date-fns';
 import { Breadcrumbs, Pagination } from '@mui/material';
 import { useGetData, usePagination } from '../../shared/custom-hooks';
 import {
@@ -10,15 +9,20 @@ import {
 } from '../../shared/types';
 import { DateFilterForm, LeagueNameRow } from '../../shared/ui';
 import styles from './league-name-component.module.css';
+import { formatedTime } from '../../shared/functions';
 
 export function LeagueNameComponent() {
   const [firstValue, setFirstValue] = useState<Date | null>(null);
   const [secondValue, setSecondValue] = useState<Date | null>(null);
   const { id } = useParams();
-  const { data, isError } = useGetData(
-    'league-name',
-    `competitions/${id}/matches?dateFrom=2022-01-01&dateTo=2022-01-01`,
-  );
+  const { data, isError, isLoading } = useGetData({
+    QUERY_KEY: 'league-name',
+    url: `competitions/${id}/matches`,
+    firstValue,
+    secondValue,
+  });
+
+  console.log(isLoading);
 
   const statusFilter = (status: string) => {
     if (status === 'SCHEDULED') return 'Запланирован';
@@ -31,10 +35,10 @@ export function LeagueNameComponent() {
     return 'Отменен';
   };
 
-  const formatedTime = (time: string) => {
-    const parsedTime = parseISO(time);
-    return format(parsedTime, 'dd-MM-yyyy HH-mm');
-  };
+  // const formatedTime = (time: string) => {
+  //   const parsedTime = parseISO(time);
+  //   return format(parsedTime, 'dd-MM-yyyy HH-mm');
+  // };
 
   const matchResult = (item: TScore) => {
     if (item.fullTime.awayTeam === null)
@@ -53,11 +57,17 @@ export function LeagueNameComponent() {
 
   const mappedData = data?.matches.map((item: TScheduleLeagueMatches) => ({
     id: item.id,
-    date: formatedTime(item.utcDate).slice(0, 10),
+    date: formatedTime({
+      time: item.utcDate,
+      dateFormat: 'dd-MM-yyyy HH-mm',
+    }).slice(0, 10),
     teams: `${item.homeTeam.name} - ${item.awayTeam.name}`,
     res: matchResult(item.score),
     status: statusFilter(item.status),
-    time: formatedTime(item.utcDate).slice(10),
+    time: formatedTime({
+      time: item.utcDate,
+      dateFormat: 'dd-MM-yyyy HH-mm',
+    }).slice(10),
   })) as TMappedDataTeams[];
 
   // const filteredCurrentPosts = mappedData?.filter((item: TMappedDataTeams) => {
