@@ -44,7 +44,7 @@ export function TeamsComponent() {
       <div className={styles.list_block}>
         {currentPosts?.map((item: TTeams) => (
           <LeagueElement
-            linkTo="/"
+            linkTo={`/teams/${item.id}`}
             key={item.id}
             countryName={item.area.name}
             leagueName={item.name}
