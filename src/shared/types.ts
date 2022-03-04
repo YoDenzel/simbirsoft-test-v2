@@ -95,7 +95,7 @@ export type TScore = {
   fullTime: TTimeScore;
   halfTime: TTimeScore;
   penalties: TTimeScore;
-  winner: string;
+  winner: string | null;
 };
 
 type TTimeScore = {
@@ -108,6 +108,7 @@ type TSeason = {
   startDate: string;
   endDate: string;
   currentMatchday: string;
+  winner?: null | string;
 };
 
 export type TTeamsCompetition = {
@@ -126,4 +127,43 @@ export type TMappedDataTeams = {
   res: string | number | null;
   status: string;
   time: string;
+};
+
+export type TTeamName = {
+  awayTeam: TTeamsArea;
+  competition: TCompetition;
+  homeTeam: TTeamsArea;
+  group: null;
+  id: number;
+  lastUpdated: string;
+  matchday: number;
+  odds: {};
+  referees: TReferees[];
+  score: TScore;
+  season: TSeason;
+  stage: string;
+  status: string;
+  utcDate: string;
+};
+
+type TCompetition = {
+  area: TTeamArea;
+  id: number;
+};
+
+type TTeamArea = {
+  code: string;
+  ensignUrl: string;
+  name: string;
+};
+
+type TSquad = {
+  countryOfBirth: string;
+  dateOfBirth: string;
+  id: number;
+  name: string;
+  nationality: string;
+  position: string;
+  role: string;
+  shirtNumber: number | null;
 };
