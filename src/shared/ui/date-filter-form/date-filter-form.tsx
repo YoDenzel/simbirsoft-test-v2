@@ -24,7 +24,7 @@ export function DateFilterForm({
           <Typography
             variant="h6"
             sx={{
-              paddingTop: '10px',
+              paddingTop: '20px',
               paddingRight: '10px',
             }}
           >
@@ -51,7 +51,7 @@ export function DateFilterForm({
           <Typography
             variant="h6"
             sx={{
-              paddingTop: '10px',
+              paddingTop: '20px',
               paddingRight: '10px',
             }}
           >
