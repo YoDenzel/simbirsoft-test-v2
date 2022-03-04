@@ -1,15 +1,16 @@
 import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Breadcrumbs, Pagination } from '@mui/material';
-import { useGetData, usePagination } from '../../shared/custom-hooks';
 import {
-  TMappedDataTeams,
-  TScheduleLeagueMatches,
-  TScore,
-} from '../../shared/types';
+  useGetData,
+  useGetMatchResult,
+  usePagination,
+  useStatus,
+  useTimeFormat,
+} from '../../shared/custom-hooks';
+import { TMappedDataTeams, TScheduleLeagueMatches } from '../../shared/types';
 import { DateFilterForm, LeagueNameRow } from '../../shared/ui';
 import styles from './league-name-component.module.css';
-import { formatedTime } from '../../shared/functions';
 
 export function LeagueNameComponent() {
   const [firstValue, setFirstValue] = useState<Date | null>(null);
@@ -24,67 +25,20 @@ export function LeagueNameComponent() {
 
   console.log(isLoading);
 
-  const statusFilter = (status: string) => {
-    if (status === 'SCHEDULED') return 'Запланирован';
-    else if (status === 'LIVE') return 'В прямом эфире';
-    else if (status === 'IN_PLAY') return 'В игре';
-    else if (status === 'PAUSED') return 'Пауза';
-    else if (status === 'FINISHED') return 'Завершен';
-    else if (status === 'POSTPONED') return 'Отложен';
-    else if (status === 'SUSPENDED') return 'Приостановлен';
-    return 'Отменен';
-  };
-
-  // const formatedTime = (time: string) => {
-  //   const parsedTime = parseISO(time);
-  //   return format(parsedTime, 'dd-MM-yyyy HH-mm');
-  // };
-
-  const matchResult = (item: TScore) => {
-    if (item.fullTime.awayTeam === null)
-      return 'Еще не сыгран или результат отстутствует';
-    const fullTime = `${item.fullTime.homeTeam}:${item.fullTime.awayTeam}`;
-    const extraTime =
-      item.extraTime.homeTeam === null
-        ? ''
-        : `(${item.extraTime.homeTeam}:${item.extraTime.awayTeam})`;
-    const penalty =
-      item.penalties.homeTeam === null
-        ? ''
-        : `(${item.penalties.homeTeam}:${item.penalties.awayTeam})`;
-    return `${fullTime} ${extraTime} ${penalty}`;
-  };
-
   const mappedData = data?.matches.map((item: TScheduleLeagueMatches) => ({
     id: item.id,
-    date: formatedTime({
+    date: useTimeFormat({
       time: item.utcDate,
       dateFormat: 'dd-MM-yyyy HH-mm',
     }).slice(0, 10),
     teams: `${item.homeTeam.name} - ${item.awayTeam.name}`,
-    res: matchResult(item.score),
-    status: statusFilter(item.status),
-    time: formatedTime({
+    res: useGetMatchResult(item.score),
+    status: useStatus(item.status),
+    time: useTimeFormat({
       time: item.utcDate,
       dateFormat: 'dd-MM-yyyy HH-mm',
     }).slice(10),
   })) as TMappedDataTeams[];
-
-  // const filteredCurrentPosts = mappedData?.filter((item: TMappedDataTeams) => {
-  //   if (firstValue && secondValue && firstValue < secondValue) {
-  //     console.log(item.date);
-  //     if (
-  //       new Date(
-  //         Number(item.date.slice(6)),
-  //         Number(item.date.slice(3, 5)),
-  //         Number(item.date.slice(0, 2)),
-  //       ) > firstValue
-  //     ) {
-  //       return item;
-  //     }
-  //   }
-  //   return null;
-  // });
 
   const { currentPosts, pageCount, setCurrentPage } = usePagination({
     filteredData: mappedData,
