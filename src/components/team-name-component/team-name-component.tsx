@@ -42,9 +42,9 @@ export function TeamNameComponent() {
     }).slice(10),
   })) as TMappedDataTeams[];
 
-  const { currentPosts, pageCount, setCurrentPage } = usePagination({
-    filteredData: mappedData,
-  });
+  const { currentPosts, pageCount, setCurrentPage } = usePagination(
+    mappedData,
+  );
 
   const breadcrumbsArr = [
     {

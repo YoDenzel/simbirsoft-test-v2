@@ -55,9 +55,7 @@ export function LeagueNameComponent() {
     }).slice(10),
   })) as TMappedDataTeams[];
 
-  const { currentPosts, pageCount, setCurrentPage } = usePagination({
-    filteredData: mappedData,
-  });
+  const { currentPosts, pageCount, setCurrentPage } = usePagination(mappedData);
 
   return (
     <>

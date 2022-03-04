@@ -1,16 +1,11 @@
 import { useState } from 'react';
 
-type TProps = {
-  filteredData: any;
-};
+interface TFilteredData {
+  length: number;
+  slice: (v1: number, v2: number) => any;
+}
 
-type TReturnValues = {
-  setCurrentPage: (v: number) => void;
-  pageCount: number;
-  currentPosts: any;
-};
-
-export const usePagination = ({ filteredData }: TProps): TReturnValues => {
+export const usePagination = <T extends TFilteredData>(filteredData: T) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(12);
   const pageCount = Math.ceil((filteredData?.length || 0) / postsPerPage);
