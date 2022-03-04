@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import { Breadcrumbs, Pagination } from '@mui/material';
+import { useParams } from 'react-router-dom';
+import { Pagination } from '@mui/material';
 import {
   useGetData,
   useGetMatchResult,
@@ -9,7 +9,11 @@ import {
   useTimeFormat,
 } from '../../shared/custom-hooks';
 import { TMappedDataTeams, TScheduleLeagueMatches } from '../../shared/types';
-import { DateFilterForm, LeagueNameRow } from '../../shared/ui';
+import {
+  BreadcrumbsElement,
+  DateFilterForm,
+  LeagueNameRow,
+} from '../../shared/ui';
 import styles from './league-name-component.module.css';
 
 export function LeagueNameComponent() {
@@ -22,6 +26,17 @@ export function LeagueNameComponent() {
     firstValue,
     secondValue,
   });
+
+  const breadcrumbsArr = [
+    {
+      title: 'Лиги',
+      linkTo: '/',
+    },
+    {
+      title: 'Название лиги',
+      linkTo: `/leagues/${id}`,
+    },
+  ];
 
   console.log(isLoading);
 
@@ -47,17 +62,7 @@ export function LeagueNameComponent() {
   return (
     <>
       <div className={styles.container}>
-        <Breadcrumbs
-          aria-label="breadcrumb"
-          sx={{ marginBottom: '15px', marginTop: '5px' }}
-        >
-          <Link className={styles.breadcrumbs_link} to="/">
-            Лиги
-          </Link>
-          <Link className={styles.breadcrumbs_link} to={`/leagues/${id}`}>
-            Название лиги
-          </Link>
-        </Breadcrumbs>
+        <BreadcrumbsElement breadcrumbsArr={breadcrumbsArr} />
         <DateFilterForm
           firstValue={firstValue}
           setFirstValue={setFirstValue}
