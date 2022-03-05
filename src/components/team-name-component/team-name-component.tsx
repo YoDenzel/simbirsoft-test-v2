@@ -45,8 +45,6 @@ export function TeamNameComponent() {
 
   const { currentPosts, pageCount, setCurrentPage } = usePagination(mappedData);
 
-  console.log(data, isError);
-
   const breadcrumbsArr = [
     {
       title: 'Команды',
