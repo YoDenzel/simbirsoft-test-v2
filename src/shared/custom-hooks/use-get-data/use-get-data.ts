@@ -24,7 +24,6 @@ export const useGetData = ({
     firstFormatedValue = format(firstValue, 'yyyy-MM-dd');
     secondFormatedValue = format(secondValue, 'yyyy-MM-dd');
     filteredUrl += `?dateFrom=${firstFormatedValue}&dateTo=${secondFormatedValue}`;
-    console.log(filteredUrl);
   }
   const query = useQuery(
     [QUERY_KEY, filteredUrl],
