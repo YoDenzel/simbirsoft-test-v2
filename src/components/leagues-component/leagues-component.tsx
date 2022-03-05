@@ -22,7 +22,12 @@ export function LeaguesComponent() {
 
   const filteredData = data?.competitions.filter((item: TCompetitionsList) => {
     if (
-      item.name.toUpperCase().includes(search.toUpperCase().replace(/\s/g, ''))
+      item.name
+        .toUpperCase()
+        .includes(search.toUpperCase().replace(/\s/g, '')) ||
+      item.area.name
+        .toUpperCase()
+        .includes(search.toUpperCase().replace(/\s/g, ''))
     ) {
       return item;
     }
