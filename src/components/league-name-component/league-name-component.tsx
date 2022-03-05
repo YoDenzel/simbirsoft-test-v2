@@ -12,6 +12,7 @@ import { TMappedDataTeams, TScheduleLeagueMatches } from '../../shared/types';
 import {
   BreadcrumbsElement,
   DateFilterForm,
+  ErrorNotification,
   LeagueNameRow,
 } from '../../shared/ui';
 import styles from './league-name-component.module.css';
@@ -57,7 +58,7 @@ export function LeagueNameComponent() {
 
   const { currentPosts, pageCount, setCurrentPage } = usePagination(mappedData);
 
-  return (
+  return !isError ? (
     <>
       <div className={styles.container}>
         <BreadcrumbsElement breadcrumbsArr={breadcrumbsArr} />
@@ -68,34 +69,30 @@ export function LeagueNameComponent() {
           setSecondValue={setSecondValue}
         />
       </div>
-      {!isError ? (
-        <>
-          <div className={styles.league_block}>
-            {currentPosts?.map((item: TMappedDataTeams) => (
-              <LeagueNameRow
-                key={item.id}
-                date={item.date}
-                teams={item.teams}
-                res={item.res}
-                status={item.status}
-                time={item.time}
-              />
-            ))}
-          </div>
-          <Pagination
-            sx={{
-              display: 'flex',
-              justifyContent: 'center',
-              margin: '20px 0px',
-            }}
-            count={pageCount}
-            onChange={(_, value) => setCurrentPage(value)}
-            shape="rounded"
+      <div className={styles.league_block}>
+        {currentPosts?.map((item: TMappedDataTeams) => (
+          <LeagueNameRow
+            key={item.id}
+            date={item.date}
+            teams={item.teams}
+            res={item.res}
+            status={item.status}
+            time={item.time}
           />
-        </>
-      ) : (
-        <div>Error</div>
-      )}
+        ))}
+      </div>
+      <Pagination
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          margin: '20px 0px',
+        }}
+        count={pageCount}
+        onChange={(_, value) => setCurrentPage(value)}
+        shape="rounded"
+      />
     </>
+  ) : (
+    <ErrorNotification linkTo="/" />
   );
 }
