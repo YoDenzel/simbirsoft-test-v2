@@ -5,7 +5,7 @@ import {
   usePagination,
 } from '../../shared/custom-hooks';
 import { TTeams } from '../../shared/types';
-import { LeagueElement } from '../../shared/ui';
+import { TeamElement } from '../../shared/ui';
 import styles from '../leagues-component/leagues-component.module.css';
 
 export function TeamsComponent() {
@@ -26,7 +26,6 @@ export function TeamsComponent() {
   const { currentPosts, pageCount, setCurrentPage } =
     usePagination<TTeams>(filteredData);
 
-  console.log(data);
   return (
     <div className={styles.container}>
       <TextField
@@ -42,10 +41,10 @@ export function TeamsComponent() {
       />
       <div className={styles.list_block}>
         {currentPosts?.map((item: TTeams) => (
-          <LeagueElement
+          <TeamElement
             linkTo={`/teams/${item.id}`}
             key={item.id}
-            countryName={item.area.name}
+            imgUrl={item.crestUrl}
             leagueName={item.name}
           />
         ))}
