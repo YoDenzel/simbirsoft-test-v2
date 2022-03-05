@@ -1,6 +1,6 @@
-import { Typography } from '@mui/material';
 import { NavElement } from '..';
 import styles from './nav-bar.module.css';
+import footballFieldIcon from '../icons/football-field-icon.svg';
 
 export function NavBar() {
   const links = [
@@ -16,9 +16,11 @@ export function NavBar() {
 
   return (
     <div className={styles.container}>
-      <Typography variant="h5" sx={{ padding: '16px' }}>
-        Heading
-      </Typography>
+      <img
+        src={footballFieldIcon}
+        alt="Футбольное поле"
+        className={styles.football_icon}
+      />
       {links.map(item => (
         <NavElement linkTo={item.linkTo} title={item.title} key={item.title} />
       ))}

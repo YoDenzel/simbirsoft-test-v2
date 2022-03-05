@@ -10,6 +10,12 @@
   color: black;
 }
 
+.football_icon {
+  height: 60px;
+  width: 60px;
+  padding: 16px;
+}
+
 @media (max-width: 340px) {
   .container {
     flex-direction: column;
