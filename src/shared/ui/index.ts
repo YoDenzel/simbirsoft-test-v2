@@ -6,3 +6,4 @@ export { LeagueNameRowElement } from './league-name-row-element';
 export { DateFilterForm } from './date-filter-form';
 export { BreadcrumbsElement } from './breadcrumbs-element';
 export { ErrorNotification } from './error-notification';
+export { TeamElement } from './team-element';

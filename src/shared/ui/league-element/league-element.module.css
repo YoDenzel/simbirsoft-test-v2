@@ -14,6 +14,12 @@
   color: var(--header-color);
 }
 
+.club_emblem {
+  padding-bottom: 25px;
+  height: 50px;
+  width: 50px;
+}
+
 @media (max-width: 500px) {
   .container {
     flex: 100%;
