@@ -21,6 +21,7 @@ export function LeagueElement({
           sx={{
             padding: '25px 25px 0px 25px',
           }}
+          color="primary.dark"
         >
           {leagueName}
         </Typography>
@@ -29,6 +30,7 @@ export function LeagueElement({
             paddingBottom: '25px',
           }}
           variant="subtitle1"
+          color="secondary"
         >
           {countryName}
         </Typography>
