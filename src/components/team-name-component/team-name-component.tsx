@@ -67,7 +67,7 @@ export function TeamNameComponent() {
           setSecondValue={setSecondValue}
         />
       </div>
-      {!isError ? (
+      {!isError && !(data?.count === 0) ? (
         <>
           <div className={styles.league_block}>
             {currentPosts?.map((item: TMappedDataTeams) => (
