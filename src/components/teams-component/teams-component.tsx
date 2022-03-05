@@ -24,7 +24,7 @@ export function TeamsComponent() {
     return null;
   });
   const { currentPosts, pageCount, setCurrentPage } =
-    usePagination(filteredData);
+    usePagination<TTeams>(filteredData);
 
   console.log(data);
   return (

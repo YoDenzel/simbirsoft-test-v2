@@ -29,7 +29,7 @@ export function LeaguesComponent() {
     return null;
   });
   const { currentPosts, pageCount, setCurrentPage } =
-    usePagination(filteredData);
+    usePagination<TCompetitionsList>(filteredData);
 
   console.log(data, isError);
 
