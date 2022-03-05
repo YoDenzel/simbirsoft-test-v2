@@ -1,6 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { ruRU } from '@mui/material/locale';
+import { grey, blue } from '@mui/material/colors';
 import {
   LeagueNameComponent,
   LeaguesComponent,
@@ -10,7 +11,20 @@ import {
 import { NavBar } from '../../shared/ui';
 
 function App() {
-  const theme = createTheme({}, ruRU);
+  const theme = createTheme(
+    {
+      palette: {
+        primary: {
+          main: blue[700],
+          dark: '#000',
+        },
+        secondary: {
+          main: grey[700],
+        },
+      },
+    },
+    ruRU,
+  );
 
   return (
     <ThemeProvider theme={theme}>
