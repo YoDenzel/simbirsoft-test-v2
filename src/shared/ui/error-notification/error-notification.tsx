@@ -5,13 +5,14 @@ import styles from './error-notification.module.css';
 
 type TProps = {
   linkTo: string;
+  title: string;
 };
 
-export function ErrorNotification({ linkTo }: TProps) {
+export function ErrorNotification({ linkTo, title }: TProps) {
   return (
     <div className={styles.container}>
       <Typography variant="h2">Ошибка</Typography>
-      <img src={errorIcon} alt="" className={styles.error_image} />
+      <img src={errorIcon} alt="Ошибка" className={styles.error_image} />
       <Typography
         variant="h5"
         sx={{
@@ -19,11 +20,11 @@ export function ErrorNotification({ linkTo }: TProps) {
           paddingTop: '15px',
         }}
       >
-        Подождите пару минут или нажмите{' '}
+        Подождите пару минут и перезагрузите страницу или нажмите{' '}
         <Link className={styles.link} to={linkTo}>
           сюда
         </Link>{' '}
-        и выберите другой элемент
+        {title}
       </Typography>
     </div>
   );
