@@ -21,7 +21,7 @@ export function LeagueNameComponent() {
   const [firstValue, setFirstValue] = useState<Date | null>(null);
   const [secondValue, setSecondValue] = useState<Date | null>(null);
   const { id } = useParams();
-  const { data, isError, isLoading } = useGetData({
+  const { data, isError } = useGetData({
     QUERY_KEY: 'league-name',
     url: `competitions/${id}/matches`,
     firstValue,
@@ -38,8 +38,6 @@ export function LeagueNameComponent() {
       linkTo: `/leagues/${id}`,
     },
   ];
-
-  console.log(isLoading);
 
   const mappedData = data?.matches.map((item: TScheduleLeagueMatches) => ({
     id: item.id,
@@ -93,6 +91,6 @@ export function LeagueNameComponent() {
       />
     </>
   ) : (
-    <ErrorNotification linkTo="/" />
+    <ErrorNotification linkTo="/" title="и выберите другой элемент" />
   );
 }

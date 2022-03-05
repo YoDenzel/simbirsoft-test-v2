@@ -5,7 +5,7 @@ import {
   usePagination,
 } from '../../shared/custom-hooks';
 import styles from './leagues-component.module.css';
-import { LeagueElement } from '../../shared/ui';
+import { ErrorNotification, LeagueElement } from '../../shared/ui';
 import { TCompetitionsList } from '../../shared/types';
 
 export function LeaguesComponent() {
@@ -31,8 +31,6 @@ export function LeaguesComponent() {
   const { currentPosts, pageCount, setCurrentPage } =
     usePagination<TCompetitionsList>(filteredData);
 
-  console.log(data, isError);
-
   return (
     <div className={styles.container}>
       <TextField
@@ -46,23 +44,29 @@ export function LeaguesComponent() {
           margin: '20px 16px',
         }}
       />
-      <div className={styles.list_block}>
-        {currentPosts?.map((item: TCompetitionsList) => (
-          <LeagueElement
-            linkTo={`leagues/${item.id}`}
-            key={item.id}
-            countryName={item.area.name}
-            leagueName={item.name}
-          />
-        ))}
-      </div>
-      <div className={styles.pagination_block}>
-        <Pagination
-          count={pageCount}
-          onChange={(_, value) => setCurrentPage(value)}
-          shape="rounded"
-        />
-      </div>
+      {!isError ? (
+        <>
+          <div className={styles.list_block}>
+            {currentPosts?.map((item: TCompetitionsList) => (
+              <LeagueElement
+                linkTo={`leagues/${item.id}`}
+                key={item.id}
+                countryName={item.area.name}
+                leagueName={item.name}
+              />
+            ))}
+          </div>
+          <div className={styles.pagination_block}>
+            <Pagination
+              count={pageCount}
+              onChange={(_, value) => setCurrentPage(value)}
+              shape="rounded"
+            />
+          </div>
+        </>
+      ) : (
+        <ErrorNotification linkTo="/" title="" />
+      )}
     </div>
   );
 }

@@ -5,11 +5,11 @@ import {
   usePagination,
 } from '../../shared/custom-hooks';
 import { TTeams } from '../../shared/types';
-import { TeamElement } from '../../shared/ui';
+import { ErrorNotification, TeamElement } from '../../shared/ui';
 import styles from '../leagues-component/leagues-component.module.css';
 
 export function TeamsComponent() {
-  const { data } = useGetData({ QUERY_KEY: 'teams', url: 'teams/' });
+  const { data, isError } = useGetData({ QUERY_KEY: 'teams', url: 'teams/' });
   const [search, setSearch] = useLocalStorage({
     defaultValue: '',
     key: 'teams-search',
@@ -39,23 +39,29 @@ export function TeamsComponent() {
           margin: '20px 16px',
         }}
       />
-      <div className={styles.list_block}>
-        {currentPosts?.map((item: TTeams) => (
-          <TeamElement
-            linkTo={`/teams/${item.id}`}
-            key={item.id}
-            imgUrl={item.crestUrl}
-            leagueName={item.name}
-          />
-        ))}
-      </div>
-      <div className={styles.pagination_block}>
-        <Pagination
-          count={pageCount}
-          onChange={(_, value) => setCurrentPage(value)}
-          shape="rounded"
-        />
-      </div>
+      {!isError ? (
+        <>
+          <div className={styles.list_block}>
+            {currentPosts?.map((item: TTeams) => (
+              <TeamElement
+                linkTo={`/teams/${item.id}`}
+                key={item.id}
+                imgUrl={item.crestUrl}
+                leagueName={item.name}
+              />
+            ))}
+          </div>
+          <div className={styles.pagination_block}>
+            <Pagination
+              count={pageCount}
+              onChange={(_, value) => setCurrentPage(value)}
+              shape="rounded"
+            />
+          </div>
+        </>
+      ) : (
+        <ErrorNotification linkTo="/teams" title="" />
+      )}
     </div>
   );
 }

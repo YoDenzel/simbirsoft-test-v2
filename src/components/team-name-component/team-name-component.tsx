@@ -11,6 +11,7 @@ import {
 import {
   BreadcrumbsElement,
   DateFilterForm,
+  ErrorNotification,
   LeagueNameRow,
 } from '../../shared/ui';
 import styles from '../league-name-component/league-name-component.module.css';
@@ -42,9 +43,9 @@ export function TeamNameComponent() {
     }).slice(10),
   })) as TMappedDataTeams[];
 
-  const { currentPosts, pageCount, setCurrentPage } = usePagination(
-    mappedData,
-  );
+  const { currentPosts, pageCount, setCurrentPage } = usePagination(mappedData);
+
+  console.log(data, isError);
 
   const breadcrumbsArr = [
     {
@@ -94,7 +95,7 @@ export function TeamNameComponent() {
           />
         </>
       ) : (
-        <div>Error</div>
+        <ErrorNotification linkTo="/teams" title="и выберите другой элемент" />
       )}
     </>
   );
