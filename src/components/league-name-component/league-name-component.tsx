@@ -18,6 +18,7 @@ import {
   DateFilterForm,
   ErrorNotification,
   LeagueNameRow,
+  TableSkeleton,
 } from '../../shared/ui';
 import styles from './league-name-component.module.css';
 
@@ -25,7 +26,7 @@ export function LeagueNameComponent() {
   const [firstValue, setFirstValue] = useState<Date | null>(null);
   const [secondValue, setSecondValue] = useState<Date | null>(null);
   const { id } = useParams();
-  const { data, isError } = useGetData<TScheduleOfTheLeague>({
+  const { data, isError, isLoading } = useGetData<TScheduleOfTheLeague>({
     QUERY_KEY: 'league-name',
     url: `competitions/${id}/matches`,
     firstValue,
@@ -60,41 +61,46 @@ export function LeagueNameComponent() {
 
   const { currentPosts, pageCount, setCurrentPage } = usePagination(mappedData);
 
-  return !isError ? (
-    <>
-      <div className={styles.container}>
-        <BreadcrumbsElement breadcrumbsArr={breadcrumbsArr} />
-        <DateFilterForm
-          firstValue={firstValue}
-          setFirstValue={setFirstValue}
-          secondValue={secondValue}
-          setSecondValue={setSecondValue}
-        />
-      </div>
-      <div className={styles.league_block}>
-        {currentPosts?.map((item: TMappedDataTeams) => (
-          <LeagueNameRow
-            key={item.id}
-            date={item.date}
-            teams={item.teams}
-            res={item.res}
-            status={item.status}
-            time={item.time}
+  if (isError) {
+    return <ErrorNotification linkTo="/" title=", и выберите другой элемент" />;
+  } else if (isLoading) {
+    return <TableSkeleton />;
+  } else
+    return (
+      <>
+        <div className={styles.container}>
+          <BreadcrumbsElement breadcrumbsArr={breadcrumbsArr} />
+          <DateFilterForm
+            firstValue={firstValue}
+            setFirstValue={setFirstValue}
+            secondValue={secondValue}
+            setSecondValue={setSecondValue}
           />
-        ))}
-      </div>
-      <Pagination
-        sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          margin: '20px 0px',
-        }}
-        count={pageCount}
-        onChange={(_, value) => setCurrentPage(value)}
-        shape="rounded"
-      />
-    </>
-  ) : (
-    <ErrorNotification linkTo="/" title="и выберите другой элемент" />
-  );
+        </div>
+        <div className={styles.league_block}>
+          {currentPosts?.map((item: TMappedDataTeams) => (
+            <LeagueNameRow
+              key={item.id}
+              date={item.date}
+              teams={item.teams}
+              res={item.res}
+              status={item.status}
+              time={item.time}
+            />
+          ))}
+        </div>
+        <Pagination
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            margin: '20px 0px',
+          }}
+          count={pageCount}
+          onChange={(_, value) => {
+            setCurrentPage(value);
+          }}
+          shape="rounded"
+        />
+      </>
+    );
 }

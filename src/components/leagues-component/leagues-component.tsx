@@ -5,7 +5,11 @@ import {
   usePagination,
 } from '../../shared/custom-hooks';
 import styles from './leagues-component.module.css';
-import { ErrorNotification, LeagueElement } from '../../shared/ui';
+import {
+  ErrorNotification,
+  LeagueElement,
+  MainPagesSkeleton,
+} from '../../shared/ui';
 import { TCompetitionsData, TCompetitionsList } from '../../shared/types';
 
 export function LeaguesComponent() {
@@ -13,7 +17,7 @@ export function LeaguesComponent() {
     defaultValue: '',
     key: 'search',
   });
-  const { data, isError } = useGetData<TCompetitionsData>({
+  const { data, isError, isLoading } = useGetData<TCompetitionsData>({
     QUERY_KEY: 'leagues',
     url: 'competitions/',
   });
@@ -36,42 +40,42 @@ export function LeaguesComponent() {
   const { currentPosts, pageCount, setCurrentPage } =
     usePagination<TCompetitionsList>(filteredData);
 
-  return (
-    <div className={styles.container}>
-      <TextField
-        id="outlined-basic"
-        placeholder={PLACEHOLDER}
-        variant="outlined"
-        value={search}
-        size="medium"
-        onChange={event => setSearch(event.target.value)}
-        sx={{
-          margin: '20px 16px',
-        }}
-      />
-      {!isError ? (
-        <>
-          <div className={styles.list_block}>
-            {currentPosts?.map((item: TCompetitionsList) => (
-              <LeagueElement
-                linkTo={`leagues/${item.id}`}
-                key={item.id}
-                countryName={item.area.name}
-                leagueName={item.name}
-              />
-            ))}
-          </div>
-          <div className={styles.pagination_block}>
-            <Pagination
-              count={pageCount}
-              onChange={(_, value) => setCurrentPage(value)}
-              shape="rounded"
+  if (isError) {
+    return <ErrorNotification linkTo="/" title="" />;
+  } else if (isLoading) {
+    return <MainPagesSkeleton />;
+  } else
+    return (
+      <div className={styles.container}>
+        <TextField
+          id="outlined-basic"
+          placeholder={PLACEHOLDER}
+          variant="outlined"
+          value={search}
+          size="medium"
+          onChange={event => setSearch(event.target.value)}
+          sx={{
+            margin: '20px 16px',
+          }}
+        />
+        <div className={styles.list_block}>
+          {currentPosts?.map((item: TCompetitionsList) => (
+            <LeagueElement
+              linkTo={`leagues/${item.id}`}
+              key={item.id}
+              countryName={item.area.name}
+              leagueName={item.name}
             />
-          </div>
-        </>
-      ) : (
-        <ErrorNotification linkTo="/" title="" />
-      )}
-    </div>
-  );
+          ))}
+        </div>
+        <div className={styles.pagination_block}>
+          <Pagination
+            count={pageCount}
+            onChange={(_, value) => setCurrentPage(value)}
+            shape="rounded"
+          />
+        </div>
+        )
+      </div>
+    );
 }

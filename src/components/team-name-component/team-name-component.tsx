@@ -13,6 +13,7 @@ import {
   DateFilterForm,
   ErrorNotification,
   LeagueNameRow,
+  TableSkeleton,
 } from '../../shared/ui';
 import styles from '../league-name-component/league-name-component.module.css';
 import {
@@ -25,7 +26,7 @@ export function TeamNameComponent() {
   const [firstValue, setFirstValue] = useState<Date | null>(null);
   const [secondValue, setSecondValue] = useState<Date | null>(null);
   const { id } = useParams();
-  const { data, isError } = useGetData<TParticularTeam>({
+  const { data, isError, isLoading } = useGetData<TParticularTeam>({
     QUERY_KEY: 'team',
     url: `teams/${id}/matches/`,
     firstValue,
@@ -60,45 +61,47 @@ export function TeamNameComponent() {
     },
   ];
 
-  return (
-    <>
-      <div className={styles.container}>
-        <BreadcrumbsElement breadcrumbsArr={breadcrumbsArr} />
-        <DateFilterForm
-          firstValue={firstValue}
-          setFirstValue={setFirstValue}
-          secondValue={secondValue}
-          setSecondValue={setSecondValue}
-        />
-      </div>
-      {!isError && !(data?.count === 0) ? (
-        <>
-          <div className={styles.league_block}>
-            {currentPosts?.map((item: TMappedDataTeams) => (
-              <LeagueNameRow
-                key={item.id}
-                date={item.date}
-                teams={item.teams}
-                res={item.res}
-                status={item.status}
-                time={item.time}
-              />
-            ))}
-          </div>
-          <Pagination
-            sx={{
-              display: 'flex',
-              justifyContent: 'center',
-              margin: '20px 0px',
-            }}
-            count={pageCount}
-            onChange={(_, value) => setCurrentPage(value)}
-            shape="rounded"
+  if (isError || data?.count === 0) {
+    return (
+      <ErrorNotification linkTo="/teams" title=", и выберите другой элемент" />
+    );
+  } else if (isLoading) {
+    return <TableSkeleton />;
+  } else
+    return (
+      <>
+        <div className={styles.container}>
+          <BreadcrumbsElement breadcrumbsArr={breadcrumbsArr} />
+          <DateFilterForm
+            firstValue={firstValue}
+            setFirstValue={setFirstValue}
+            secondValue={secondValue}
+            setSecondValue={setSecondValue}
           />
-        </>
-      ) : (
-        <ErrorNotification linkTo="/teams" title="и выберите другой элемент" />
-      )}
-    </>
-  );
+        </div>
+
+        <div className={styles.league_block}>
+          {currentPosts?.map((item: TMappedDataTeams) => (
+            <LeagueNameRow
+              key={item.id}
+              date={item.date}
+              teams={item.teams}
+              res={item.res}
+              status={item.status}
+              time={item.time}
+            />
+          ))}
+        </div>
+        <Pagination
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            margin: '20px 0px',
+          }}
+          count={pageCount}
+          onChange={(_, value) => setCurrentPage(value)}
+          shape="rounded"
+        />
+      </>
+    );
 }
