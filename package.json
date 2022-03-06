@@ -1,5 +1,6 @@
 {
-  "name": "my-app",
+  "name": "simbirsoft-test",
+  "homepage": "https://YoDenzel.github.io/simbirsoft-test-v2/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -25,6 +26,8 @@
     "web-vitals": "^2.1.0"
   },
   "scripts": {
+    "predeploy": "yarn run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -52,6 +55,7 @@
     "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
+    "gh-pages": "^3.2.3",
     "prettier": "2.5.1",
     "typescript-plugin-css-modules": "^3.4.0"
   }
