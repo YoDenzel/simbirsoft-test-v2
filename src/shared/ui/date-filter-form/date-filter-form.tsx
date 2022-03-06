@@ -63,6 +63,7 @@ export function DateFilterForm({
             onChange={newValue => {
               setSecondValue(newValue);
             }}
+            minDate={firstValue}
             renderInput={params => (
               <TextField {...params} sx={{ paddingTop: '10px' }} />
             )}
