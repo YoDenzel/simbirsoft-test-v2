@@ -8,7 +8,11 @@ import {
   useStatus,
   useTimeFormat,
 } from '../../shared/custom-hooks';
-import { TMappedDataTeams, TScheduleLeagueMatches } from '../../shared/types';
+import {
+  TMappedDataTeams,
+  TScheduleLeagueMatches,
+  TScheduleOfTheLeague,
+} from '../../shared/types';
 import {
   BreadcrumbsElement,
   DateFilterForm,
@@ -21,7 +25,7 @@ export function LeagueNameComponent() {
   const [firstValue, setFirstValue] = useState<Date | null>(null);
   const [secondValue, setSecondValue] = useState<Date | null>(null);
   const { id } = useParams();
-  const { data, isError } = useGetData({
+  const { data, isError } = useGetData<TScheduleOfTheLeague>({
     QUERY_KEY: 'league-name',
     url: `competitions/${id}/matches`,
     firstValue,
@@ -52,7 +56,7 @@ export function LeagueNameComponent() {
       time: item.utcDate,
       dateFormat: 'dd-MM-yyyy HH-mm',
     }).slice(10),
-  })) as TMappedDataTeams[];
+  })) as unknown as TMappedDataTeams[];
 
   const { currentPosts, pageCount, setCurrentPage } = usePagination(mappedData);
 

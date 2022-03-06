@@ -6,14 +6,14 @@ import {
 } from '../../shared/custom-hooks';
 import styles from './leagues-component.module.css';
 import { ErrorNotification, LeagueElement } from '../../shared/ui';
-import { TCompetitionsList } from '../../shared/types';
+import { TCompetitionsData, TCompetitionsList } from '../../shared/types';
 
 export function LeaguesComponent() {
   const [search, setSearch] = useLocalStorage({
     defaultValue: '',
     key: 'search',
   });
-  const { data, isError } = useGetData({
+  const { data, isError } = useGetData<TCompetitionsData>({
     QUERY_KEY: 'leagues',
     url: 'competitions/',
   });
@@ -32,7 +32,7 @@ export function LeaguesComponent() {
       return item;
     }
     return null;
-  });
+  }) as TCompetitionsList[];
   const { currentPosts, pageCount, setCurrentPage } =
     usePagination<TCompetitionsList>(filteredData);
 

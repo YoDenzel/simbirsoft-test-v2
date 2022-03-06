@@ -15,13 +15,17 @@ import {
   LeagueNameRow,
 } from '../../shared/ui';
 import styles from '../league-name-component/league-name-component.module.css';
-import { TMappedDataTeams, TTeamName } from '../../shared/types';
+import {
+  TMappedDataTeams,
+  TParticularTeam,
+  TTeamName,
+} from '../../shared/types';
 
 export function TeamNameComponent() {
   const [firstValue, setFirstValue] = useState<Date | null>(null);
   const [secondValue, setSecondValue] = useState<Date | null>(null);
   const { id } = useParams();
-  const { data, isError } = useGetData({
+  const { data, isError } = useGetData<TParticularTeam>({
     QUERY_KEY: 'team',
     url: `teams/${id}/matches/`,
     firstValue,
@@ -41,7 +45,7 @@ export function TeamNameComponent() {
       time: item.utcDate,
       dateFormat: 'dd-MM-yyyy HH-mm',
     }).slice(10),
-  })) as TMappedDataTeams[];
+  })) as unknown as TMappedDataTeams[];
 
   const { currentPosts, pageCount, setCurrentPage } = usePagination(mappedData);
 

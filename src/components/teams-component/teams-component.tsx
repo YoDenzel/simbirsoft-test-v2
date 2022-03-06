@@ -4,12 +4,15 @@ import {
   useLocalStorage,
   usePagination,
 } from '../../shared/custom-hooks';
-import { TTeams } from '../../shared/types';
+import { TTeams, TTeamsData } from '../../shared/types';
 import { ErrorNotification, TeamElement } from '../../shared/ui';
 import styles from '../leagues-component/leagues-component.module.css';
 
 export function TeamsComponent() {
-  const { data, isError } = useGetData({ QUERY_KEY: 'teams', url: 'teams/' });
+  const { data, isError } = useGetData<TTeamsData>({
+    QUERY_KEY: 'teams',
+    url: 'teams/',
+  });
   const [search, setSearch] = useLocalStorage({
     defaultValue: '',
     key: 'teams-search',
@@ -22,7 +25,7 @@ export function TeamsComponent() {
       return item;
     }
     return null;
-  });
+  }) as TTeams[];
   const { currentPosts, pageCount, setCurrentPage } =
     usePagination<TTeams>(filteredData);
 
