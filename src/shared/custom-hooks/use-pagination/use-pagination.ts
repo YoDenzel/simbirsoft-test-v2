@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export const usePagination = <T>(filteredData: T[]) => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -7,6 +7,10 @@ export const usePagination = <T>(filteredData: T[]) => {
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = filteredData?.slice(indexOfFirstPost, indexOfLastPost);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [currentPage]);
 
   return { setCurrentPage, pageCount, currentPosts };
 };
