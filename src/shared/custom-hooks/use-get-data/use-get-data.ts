@@ -1,5 +1,5 @@
 import { format } from 'date-fns';
-import { useQuery } from 'react-query';
+import { useQuery, UseQueryResult } from 'react-query';
 import { fetchData } from '../../api';
 
 const STALE_TIME = 0;
@@ -11,12 +11,12 @@ type TProps = {
   secondValue?: Date | null;
 };
 
-export const useGetData = ({
+export const useGetData = <T>({
   QUERY_KEY,
   url,
   firstValue,
   secondValue,
-}: TProps) => {
+}: TProps): UseQueryResult<T> => {
   let firstFormatedValue = null;
   let secondFormatedValue = null;
   let filteredUrl = url;
