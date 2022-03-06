@@ -34,7 +34,7 @@ export type TArea = {
 export type TTeamsData = {
   count: number;
   filters: {};
-  teams: TTeams;
+  teams: TTeams[];
 };
 
 export type TTeams = {
@@ -85,8 +85,8 @@ export type TScheduleLeagueMatches = {
 type TReferees = {
   id: number;
   name: string;
-  role: string;
-  nationality: string;
+  role?: string;
+  nationality: string | null;
 };
 
 export type TScore = {
@@ -146,6 +146,30 @@ export type TTeamName = {
   utcDate: string;
 };
 
+export type TParticularTeam = {
+  count: number;
+  filters: {};
+  matches: TTeamMatches[];
+};
+
+export type TTeamMatches = {
+  awayTeam: TTeamsArea;
+  competition: TCompetition;
+  homeTeam: TTeamsArea;
+  group: null;
+  id: number;
+  lastUpdated: string;
+  matchday: number;
+  odds: {};
+  referees: TReferees[];
+  score: TScore;
+  season: TSeason;
+  stage: string;
+  status: string;
+  utcDate: string;
+  attendance: number;
+};
+
 type TCompetition = {
   area: TTeamArea;
   id: number;
@@ -155,15 +179,4 @@ type TTeamArea = {
   code: string;
   ensignUrl: string;
   name: string;
-};
-
-type TSquad = {
-  countryOfBirth: string;
-  dateOfBirth: string;
-  id: number;
-  name: string;
-  nationality: string;
-  position: string;
-  role: string;
-  shirtNumber: number | null;
 };
