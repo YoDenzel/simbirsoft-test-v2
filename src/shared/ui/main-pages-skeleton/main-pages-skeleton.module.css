@@ -1,0 +1,18 @@
+.skeleton_container {
+  margin: 16px;
+}
+
+.list_block_skeleton {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+@media (max-width: 750px) {
+  .list_block_skeleton {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+  }
+}
