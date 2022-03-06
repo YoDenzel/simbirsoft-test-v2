@@ -7,3 +7,5 @@ export { DateFilterForm } from './date-filter-form';
 export { BreadcrumbsElement } from './breadcrumbs-element';
 export { ErrorNotification } from './error-notification';
 export { TeamElement } from './team-element';
+export { TableSkeleton } from './table-skeleton';
+export { MainPagesSkeleton } from './main-pages-skeleton';

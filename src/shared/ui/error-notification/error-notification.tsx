@@ -23,7 +23,7 @@ export function ErrorNotification({ linkTo, title }: TProps) {
         Подождите пару минут и перезагрузите страницу или нажмите{' '}
         <Link className={styles.link} to={linkTo}>
           сюда
-        </Link>{' '}
+        </Link>
         {title}
       </Typography>
     </div>
