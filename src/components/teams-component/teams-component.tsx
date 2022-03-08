@@ -22,7 +22,7 @@ export function TeamsComponent() {
     key: 'teams-search',
   });
   const PLACEHOLDER = 'Поиск';
-  const filteredData = data?.teams.filter((item: TTeams) => {
+  const filteredData = data?.teams.filter(item => {
     if (
       item.name.toUpperCase().includes(search.toUpperCase().replace(/\s/g, ''))
     ) {
@@ -52,7 +52,7 @@ export function TeamsComponent() {
         />
 
         <div className={styles.list_block}>
-          {currentPosts?.map((item: TTeams) => (
+          {currentPosts?.map(item => (
             <TeamElement
               linkTo={`/teams/${item.id}`}
               key={item.id}

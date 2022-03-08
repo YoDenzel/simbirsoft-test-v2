@@ -8,11 +8,7 @@ import {
   useStatus,
   useTimeFormat,
 } from '../../shared/custom-hooks';
-import {
-  TMappedDataTeams,
-  TScheduleLeagueMatches,
-  TScheduleOfTheLeague,
-} from '../../shared/types';
+import { TMappedDataTeams, TScheduleOfTheLeague } from '../../shared/types';
 import {
   BreadcrumbsElement,
   DateFilterForm,
@@ -44,7 +40,7 @@ export function LeagueNameComponent() {
     },
   ];
 
-  const mappedData = data?.matches.map((item: TScheduleLeagueMatches) => ({
+  const mappedData = data?.matches.map(item => ({
     id: item.id,
     date: useTimeFormat({
       time: item.utcDate,
@@ -78,7 +74,7 @@ export function LeagueNameComponent() {
           />
         </div>
         <div className={styles.league_block}>
-          {currentPosts?.map((item: TMappedDataTeams) => (
+          {currentPosts?.map(item => (
             <LeagueNameRow
               key={item.id}
               date={item.date}

@@ -16,11 +16,7 @@ import {
   TableSkeleton,
 } from '../../shared/ui';
 import styles from '../league-name-component/league-name-component.module.css';
-import {
-  TMappedDataTeams,
-  TParticularTeam,
-  TTeamName,
-} from '../../shared/types';
+import { TMappedDataTeams, TParticularTeam } from '../../shared/types';
 
 export function TeamNameComponent() {
   const [firstValue, setFirstValue] = useState<Date | null>(null);
@@ -33,7 +29,7 @@ export function TeamNameComponent() {
     secondValue,
   });
 
-  const mappedData = data?.matches.map((item: TTeamName) => ({
+  const mappedData = data?.matches.map(item => ({
     id: item.id,
     date: useTimeFormat({
       time: item.utcDate,
@@ -81,7 +77,7 @@ export function TeamNameComponent() {
         </div>
 
         <div className={styles.league_block}>
-          {currentPosts?.map((item: TMappedDataTeams) => (
+          {currentPosts?.map(item => (
             <LeagueNameRow
               key={item.id}
               date={item.date}

@@ -24,7 +24,7 @@ export function LeaguesComponent() {
 
   const PLACEHOLDER = 'Поиск';
 
-  const filteredData = data?.competitions.filter((item: TCompetitionsList) => {
+  const filteredData = data?.competitions.filter(item => {
     if (
       item.name
         .toUpperCase()
@@ -59,7 +59,7 @@ export function LeaguesComponent() {
           }}
         />
         <div className={styles.list_block}>
-          {currentPosts?.map((item: TCompetitionsList) => (
+          {currentPosts?.map((item) => (
             <LeagueElement
               linkTo={`leagues/${item.id}`}
               key={item.id}

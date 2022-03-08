@@ -10,7 +10,7 @@ import {
 } from '../../components';
 import { NavBar } from '../../shared/ui';
 
-function App() {
+export function App() {
   const theme = createTheme(
     {
       palette: {
@@ -38,5 +38,3 @@ function App() {
     </ThemeProvider>
   );
 }
-
-export default App;
